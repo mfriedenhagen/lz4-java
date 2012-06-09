@@ -92,7 +92,7 @@ public class LZ4CompressorImpl implements LZ4Compressor {
 
             // Encode Offset (little endian)
             if (distance < 0) {
-                throw new RuntimeException("distance ‚ª 0 –¢–‚É‚È‚Á‚Ä‚µ‚Ü‚Á‚Ä‚¢‚Ü‚·B");
+                throw new RuntimeException("distance ãŒ 0 æœªæº€ã«ãªã£ã¦ã—ã¾ã£ã¦ã„ã¾ã™ã€‚");
             }
             dest[destPos++] = (byte) (distance & 0xFF);
             dest[destPos++] = (byte) ((distance >> 8) & 0xFF);
@@ -147,12 +147,12 @@ public class LZ4CompressorImpl implements LZ4Compressor {
 
     private static final int encodeLength(byte[] dest, int destPos, int length) {
         if (length  < 0) {
-            throw new IllegalArgumentException("length ‚Í 0 ˆÈã‚Å‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB");
+            throw new IllegalArgumentException("length ã¯ 0 ä»¥ä¸Šã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚");
         }
 
         while (length > 254) {
             length -= 255;
-            dest[destPos++] = (byte) 255; // TODO ’è”éŒ¾‚·‚é
+            dest[destPos++] = (byte) 255; // TODO å®šæ•°å®£è¨€ã™ã‚‹
         }
 
         return destPos;
