@@ -1,5 +1,6 @@
 package biz.k11i.compress.lz4;
 
+
 public class LZ4Demo {
 
     /**
