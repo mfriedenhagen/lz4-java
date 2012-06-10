@@ -17,6 +17,6 @@ public class LZ4Codec {
     }
 
     public static LZ4Decompressor createDecompressor() {
-        return null;
+        return new LZ4DecompressorImpl();
     }
 }
