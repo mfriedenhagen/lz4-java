@@ -27,11 +27,17 @@ public class LZ4Test {
     public void checkCompressedAndDecompressedEquals() {
         final LZ4Compressor compressor = LZ4Codec.createCompressor();
         final LZ4Decompressor decompressor = LZ4Codec.createDecompressor();
-        final byte[] src = "Hallo Welt".getBytes(Charset.forName("utf-8"));
-        final byte[] dest = new byte[256];
-        compressor.compress(src, src.length, dest);
-        System.out.printf("dest.length=%d\n", dest.length);
-        String string = new String(dest, Charset.forName("utf-8"));
-        System.out.println(string);
+        final String input = "Hallo Welt Hallo Welt Hallo Welt Hallo Welt";
+        final byte[] src = input.getBytes(Charset.forName("utf-8"));
+        System.out.printf("src.length=%d\n", src.length);
+        final byte[] dst = new byte[256];
+        int compress = compressor.compress(src, dst);
+        System.out.printf("dest.length=%d\n", dst.length);
+        System.out.printf("compress=%d\n", compress);
+        String string = new String(dst, 0, compress, Charset.forName("utf-8"));
+        System.out.println("string=" + string);
+        final byte[] out = new byte[2048];
+        int decompress = decompressor.decompress(dst, compress, out);
+        System.out.printf("decompress=%d\n", decompress);
     }
 }
